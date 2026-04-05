@@ -56,10 +56,10 @@ interface Navbar {
 
 const Navbar = ({
   logo = {
-    url: "https://www.shadcnblocks.com",
+    url: "http://localhost:3000",
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
     alt: "logo",
-    title: "Shadcnblocks.com",
+    title: "Next Blog",
   },
   menu = [
     { title: "Home", url: "/" },
