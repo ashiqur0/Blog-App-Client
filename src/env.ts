@@ -6,7 +6,8 @@ export const env = createEnv({
         BACKEND_URL: z.url(),
         FRONTEND_URL: z.url(),
         API_URL: z.url(),
-        AUTH_URL: z.url()
+        AUTH_URL: z.url(),
+        NAME: z.string()
     },
 
     // Client Example
@@ -19,6 +20,7 @@ export const env = createEnv({
         FRONTEND_URL: process.env.FRONTEND_URL,
         API_URL: process.env.API_URL,
         AUTH_URL: process.env.AUTH_URL,
+        NAME: process.env.NAME,
         NEXT_PUBLIC_TEST: process.env.NEXT_PUBLIC_TEST
     }
 });
