@@ -33,6 +33,12 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
 }
 
+// Matcher to specify which routes should be protected by this middleware
 export const config = {
-    matcher: ['/dashboard', '/admin-dashboard'],
+    matcher: [
+        '/dashboard', 
+        '/dashboard/:path*', 
+        '/admin-dashboard',
+        '/admin-dashboard/:path*'
+    ],
 }
