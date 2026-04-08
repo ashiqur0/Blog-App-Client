@@ -1,3 +1,4 @@
+// import error from "@/app/(commonLayout)/about/error";
 import { env } from "@/env"
 
 const API_URL = env.API_URL;
@@ -43,6 +44,16 @@ export const blogService = {
             return {
                 data: null, error: { message: "Failed to fetch blog posts", error }
             }
+        }
+    },
+
+    getBlogById: async (id: string) => {
+        try {
+            const res = await fetch(`${API_URL}/posts/${id}`);
+            const data = await res.json();
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error: { message: "Failed to fetch blog post", error } };
         }
     }
 }
