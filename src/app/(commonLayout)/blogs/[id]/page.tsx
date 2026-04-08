@@ -3,6 +3,16 @@
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { blogService } from '@/services/blog.service';
+import { BlogPost } from '@/types';
+
+// export const dynamicParams = false; // default is true, can be set to false if you want to disable dynamic routes
+
+// return => [{id: 1}, {id: 2}, {id: 3}]
+export async function generateStaticParams() {
+    const { data } = await blogService.getBlogPosts();
+
+    return data?.data?.map((blog: BlogPost) => ({ id: blog.id })).splice(0, 3);
+}
 
 const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
