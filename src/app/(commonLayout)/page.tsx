@@ -6,7 +6,7 @@ export default async function Home() {
 
   const { data } = await blogService.getBlogPosts(
     {
-      isFeatured: true
+      isFeatured: false
     },
     {
       chache: "no-store",
