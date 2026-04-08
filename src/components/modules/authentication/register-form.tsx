@@ -22,6 +22,7 @@ const formSchema = z.object({
 })
 
 export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
+
   const form = useForm({
     defaultValues: {
       name: "",
@@ -33,10 +34,10 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
       onSubmit: formSchema
     },
 
-    onSubmit: async (value) => {
+    onSubmit: async ({ value }) => {
       const toastId = toast.loading("Creating user");
       try {
-        const { data, error } = await authClient.signUp.email(value.value);
+        const { data, error } = await authClient.signUp.email(value);
 
         if (error) {
           toast.error(error.message, { id: toastId });
@@ -67,7 +68,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
       </CardHeader>
       <CardContent>
         <form
-          id="login-form"
+          id="register-form"
           onSubmit={(e) => {
             e.preventDefault();
             form.handleSubmit();
@@ -138,7 +139,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
         </form>
       </CardContent>
       <CardFooter className="flex flex-col gap-2">
-        <Button type="submit" form="login-form" className="w-full">Register</Button>
+        <Button type="submit" form="register-form" className="w-full">Register</Button>
         <Button onClick={() => handleGoogleLogin()} variant="outline" type="button" className="w-full">
           Continue with Google
         </Button>
