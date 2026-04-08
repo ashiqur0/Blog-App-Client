@@ -1,4 +1,4 @@
-import error from "@/app/(commonLayout)/about/error";
+// import error from "@/app/(commonLayout)/about/error";
 import { env } from "@/env"
 
 const API_URL = env.API_URL;
