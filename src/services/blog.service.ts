@@ -37,9 +37,17 @@ export const blogService = {
                 config.next = { revalidate: options.revalidate };
             }
 
+            config.next = { ...config.next, tags: ['blogPosts'] };
+
+            // const res = await fetch(url.toString(), {
+            //     next: {
+            //         tags: ['blogPosts']
+            //     }
+            // });
+
             const res = await fetch(url.toString(), config);
             const data = await res.json();
-            return { data, error: null };
+            return { data: data.data, error: null };
         } catch (error) {
             return {
                 data: null, error: { message: "Failed to fetch blog posts", error }
@@ -51,7 +59,7 @@ export const blogService = {
         try {
             const res = await fetch(`${API_URL}/posts/${id}`);
             const data = await res.json();
-            return { data, error: null };
+            return { data: data.data, error: null };
         } catch (error) {
             return { data: null, error: { message: "Failed to fetch blog post", error } };
         }
