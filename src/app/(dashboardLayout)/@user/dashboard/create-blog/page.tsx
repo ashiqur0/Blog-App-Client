@@ -1,3 +1,4 @@
+import CreateBlogFormClient from "@/components/modules/user/createBlog/createBlogFormClient";
 import CreateBlogFormServer from "@/components/modules/user/createBlogFormServer";
 import { blogService } from "@/services/blog.service";
 import { BlogPost } from "@/types";
@@ -9,7 +10,8 @@ const CreateBlogPage = async () => {
     return (
         <div>
             <h1 className="text-2xl font-bold">Create Blog</h1>
-            <CreateBlogFormServer />
+            {/* <CreateBlogFormServer /> */}
+            <CreateBlogFormClient />
             {
                 data.map((blog: BlogPost) => (
                     <div key={blog.id} className="border p-4 rounded-md mt-4">
