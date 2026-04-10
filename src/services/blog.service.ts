@@ -15,6 +15,7 @@ interface ServiceOptions {
 interface GetBlogsParams {
     isFeatured?: boolean;
     search?: string;
+    page?: string;
 }
 
 export interface BlogData {
@@ -54,7 +55,7 @@ export const blogService = {
 
             const res = await fetch(url.toString(), config);
             const data = await res.json();
-            return { data: data.data, error: null };
+            return { data, error: null };
         } catch (error) {
             return {
                 data: null, error: { message: "Failed to fetch blog posts", error }
@@ -66,7 +67,7 @@ export const blogService = {
         try {
             const res = await fetch(`${API_URL}/posts/${id}`);
             const data = await res.json();
-            return { data: data.data, error: null };
+            return { data, error: null };
         } catch (error) {
             return { data: null, error: { message: "Failed to fetch blog post", error } };
         }
@@ -90,7 +91,7 @@ export const blogService = {
                 return { data: null, error: { message: data.error.message } };
             }
             
-            return { data: data.data, error: null };
+            return { data, error: null };
         } catch (error) {
             return { data: null, error: { message: "Failed to create blog post", error } };
         }

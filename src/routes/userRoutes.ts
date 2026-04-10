@@ -5,6 +5,10 @@ export const userRoutes = [
             {
                 title: "Create Blog",
                 url: "/dashboard/create-blog",
+            },
+            {
+                title: "History",
+                url: "/dashboard/history",
             }
         ],
     },
