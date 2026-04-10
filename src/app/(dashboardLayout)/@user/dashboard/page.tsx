@@ -1,11 +1,7 @@
-import React from 'react';
+import { redirect } from "next/navigation";
 
-const AdminDashboard = () => {
-    return (
-        <div>
-            <h1>User Dashboard</h1>
-        </div>
-    );
+const UserDashboard = () => {
+    return redirect("/dashboard/create-blog");
 };
 
-export default AdminDashboard;
+export default UserDashboard;

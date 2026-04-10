@@ -1,5 +1,6 @@
 // import error from "@/app/(commonLayout)/about/error";
 import { env } from "@/env"
+import { cookies } from "next/headers";
 
 const API_URL = env.API_URL;
 
@@ -14,6 +15,13 @@ interface ServiceOptions {
 interface GetBlogsParams {
     isFeatured?: boolean;
     search?: string;
+    page?: string;
+}
+
+export interface BlogData {
+    title: string;
+    content: string;
+    tags?: string[];
 }
 
 export const blogService = {
@@ -37,6 +45,14 @@ export const blogService = {
                 config.next = { revalidate: options.revalidate };
             }
 
+            config.next = { ...config.next, tags: ['blogPosts'] };
+
+            // const res = await fetch(url.toString(), {
+            //     next: {
+            //         tags: ['blogPosts']
+            //     }
+            // });
+
             const res = await fetch(url.toString(), config);
             const data = await res.json();
             return { data, error: null };
@@ -54,6 +70,30 @@ export const blogService = {
             return { data, error: null };
         } catch (error) {
             return { data: null, error: { message: "Failed to fetch blog post", error } };
+        }
+    },
+
+    createBlogPost: async (blogData: BlogData) => {
+        try {
+            const cookieStore = await cookies();
+            const res = await fetch(`${API_URL}/posts`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Cookie: cookieStore.toString()
+                },
+                body: JSON.stringify(blogData)
+            });
+
+            const data = await res.json();
+
+            if (data.error) {
+                return { data: null, error: { message: data.error.message } };
+            }
+            
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error: { message: "Failed to create blog post", error } };
         }
     }
 }
